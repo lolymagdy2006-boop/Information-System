@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Concept to Code: The Data Modeling Journey</title>
+    <link rel="stylesheet" href="Information System.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({startOnLoad: true});
+    </script>
+    <style>
+        /* Additional styles for better visual appeal */
+        img.diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        .section-header {
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        pre code {
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .mermaid {
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <img src="UNI Logo.jpeg" class="site-logo" alt="Information System Logo">
+        <h2>Information Systems Course</h2>
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span>Toggle Theme</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <a href="#" class="exit-link">Exit Course</a>
+
+        <header>
+            <div class="syllabus-label">Lecture 1</div>
+            <h1>From Concept to Code</h1>
+            <p class="subtitle">The Data Modeling Journey</p>
+        </header>
+
+        <p>Data modeling is the process of creating a visual representation of either a whole information system or parts of it to communicate connections between data points and structures. Think of it as the architectural blueprint for a database.</p>
+        <p>We move through three distinct stages of abstraction: Conceptual, Logical, and Physical.</p>
+
+        <div class="timeline-wrapper">
+            <div class="lesson-item">
+                <div class="indicator blue-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="html-title"><b>1. The Conceptual Data Model</b></h3>
+                        <p>The goal here is understanding the business. It’s a high-level overview that defines what data the system will contain without worrying about how it will be stored.</p>
+                        <p><b>Audience:</b> Business stakeholders and architects.</p>
+                        <p><b>Key Elements:</b> Entities (the "things" like Customers or Products) and Relationships (how they interact).</p>
+                        <p><b>Purpose:</b> To define the scope of the project and ensure everyone agrees on business rules.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator purple-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="css-title"><b>2. The Logical Data Model</b></h3>
+                        <p><b>Now,</b> we add structure. This model defines the data in more detail but remains independent of the specific database software (like MySQL or MongoDB) you'll eventually use.</p>
+                        <p><b>Audience:</b> Data architects and business analysts.</p>
+                        <p><b>Key Additions:</b> Attributes => The specific data points (e.g., "Customer Name," "Email"). Primary Keys => Unique identifiers for each record. Normalization => Organizing data to reduce redundancy.</p>
+                        <p><b>Purpose:</b> To create a standard map of data rules and structures.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator green-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="standard-title"><b>3. The Physical Data Model</b></h3>
+                        <p>This is the implementation phase. The model is designed for a specific database management system (DBMS). It accounts for performance, storage, and the actual technical constraints of the hardware.</p>
+                        <p><b>Audience:</b> Database Administrators (DBAs) and Developers.</p>
+                        <p><b>Key Additions:</b> Data Types => (e.g., VARCHAR, INTEGER, DATETIME). Foreign Keys => Linking tables together physically. Indexes and Constraints => Optimizing for speed and data integrity.</p>
+                        <p><b>Purpose:</b> To generate the actual SQL code (DDL) to build the database.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-header">Key Takeaway</h2>
+        <p>The transition from conceptual to physical is a process of increasing granularity. If you skip the conceptual phase, you risk building a technically perfect database that doesn't actually solve the business's problems. If you skip the physical phase, you'll have a great idea that never actually runs.</p>
+
+        <h2 class="section-header">E-Commerce Example</h2>
+
+        <h3 class="section-header"><b>Phase 1: The Conceptual Model</b></h3>
+        <p><b>Goal:</b> Identify the "nouns" of the business.</p>
+        <p><b>At this stage,</b> we aren't thinking about tables or code—just the big ideas. In a brainstorming session with a shop owner, we’d identify these Entities: Customer: The person buying. Product: What is being sold. Order: The transaction record.</p>
+        <p><b>The Relationships:</b> A Customer places an Order. An Order contains one or more Products.</p>
+        <div class="mermaid">
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--o{ PRODUCT : contains
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/ConceptualDataModel.png" alt="Conceptual Data Model Example" class="diagram">
+
+        <h3 class="section-header"><b>Phase 2: The Logical Model</b></h3>
+        <p><b>Goal:</b> Define the rules and the details (Attributes).</p>
+        <p><b>Now,</b> we decide what information we need to capture for each entity and how they link together. We also apply Normalization to ensure we aren't repeating data (e.g., we don't store the customer's address inside every single order record; we link it back to the Customer).</p>
+        <p><b>Customer Entity:</b> Attributes =>CustomerID (Key), First Name, Last Name, Email.</p>
+        <p><b>Order Entity:</b> Attributes =>OrderID (Key), OrderDate, TotalAmount.</p>
+        <p><b>Product Entity:</b> Attributes =>ProductID (Key), Name, Price, StockQuantity.</p>
+        <p><b>The Logic:</b> We realize an Order can have many Products, and a Product can be in many Orders. This is a Many-to-Many relationship, so we create a "bridge" called Order_Items to track which products are in which order.</p>
+        <div class="mermaid">
+erDiagram
+    CUSTOMER {
+        int CustomerID PK
+        string FirstName
+        string LastName
+        string Email
+    }
+    ORDER {
+        int OrderID PK
+        date OrderDate
+        float TotalAmount
+        int CustomerID FK
+    }
+    PRODUCT {
+        int ProductID PK
+        string Name
+        float Price
+        int StockQuantity
+    }
+    ORDER_ITEM {
+        int OrderItemID PK
+        int OrderID FK
+        int ProductID FK
+        int Quantity
+        float Price
+    }
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--o{ ORDER_ITEM : has
+    PRODUCT ||--o{ ORDER_ITEM : in
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wikibase_Logical_Data_Model.svg" alt="Logical Data Model Example" class="diagram">
+
+        <h3 class="section-header"><b>Phase 3: The Physical Model</b></h3>
+        <p><b>Goal:</b> Write the "blueprint" for the machine.</p>
+        <p><b>Here,</b> we get technical. We choose a database (let's assume a Relational DB like PostgreSQL) and assign Data Types.</p>
+        <p><b>Pro-tip:</b> In the physical stage, we care about performance. We might add an Index on email because we know we’ll be searching for customers by their email address constantly during login.</p>
+        <div class="mermaid">
+erDiagram
+    CUSTOMER {
+        INTEGER CustomerID PK
+        VARCHAR(50) FirstName
+        VARCHAR(50) LastName
+        VARCHAR(100) Email
+    }
+    ORDER {
+        INTEGER OrderID PK
+        DATETIME OrderDate
+        DECIMAL(10,2) TotalAmount
+        INTEGER CustomerID FK
+    }
+    PRODUCT {
+        INTEGER ProductID PK
+        VARCHAR(100) Name
+        DECIMAL(10,2) Price
+        INTEGER StockQuantity
+    }
+    ORDER_ITEM {
+        INTEGER OrderItemID PK
+        INTEGER OrderID FK
+        INTEGER ProductID FK
+        INTEGER Quantity
+        DECIMAL(10,2) Price
+    }
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--o{ ORDER_ITEM : has
+    PRODUCT ||--o{ ORDER_ITEM : in
+        </div>
+        <img src="https://source.roboflow.com/8Wu4hZMPTcPaHnD6w8VPQA1RxFp1/1mEtUtkCHlB4ZKZqzPZf/original.jpg" alt="Physical Data Model Example" class="diagram">
+
+        <h3 class="section-header">From Design to Reality</h3>
+        <p>If we were to translate that physical model into code, it looks like this:</p>
+        <pre><code>CREATE TABLE Customer (
+    CustomerID SERIAL PRIMARY KEY,
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE Product (
+    ProductID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    StockQuantity INTEGER NOT NULL
+);
+
+CREATE TABLE "Order" (
+    OrderID SERIAL PRIMARY KEY,
+    OrderDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    TotalAmount DECIMAL(10,2) NOT NULL,
+    CustomerID INTEGER NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+);
+
+CREATE TABLE Order_Item (
+    OrderItemID SERIAL PRIMARY KEY,
+    OrderID INTEGER NOT NULL,
+    ProductID INTEGER NOT NULL,
+    Quantity INTEGER NOT NULL,
+    Price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (OrderID) REFERENCES "Order"(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+CREATE INDEX idx_customer_email ON Customer(Email);
+</code></pre>
+        <img src="https://source.roboflow.com/De7W1i3xx8YEkaUnE1hdWZ0zdjx2/8MGxPPOnG9h23gSYsy1D/original.jpg" alt="E-Commerce ERD Example" class="diagram">
+
+        <h3 class="section-header">Why this flow matters</h3>
+        <p>If you jumped straight to the Physical stage, you might forget the "Order_Items" bridge. Suddenly, your database can only handle one product per order. By starting Conceptually, you caught that business requirement before a single line of code was written.</p>
+
+    </div>
+
+    <script src="Information System.js"></script>
+</body>
+</html>
