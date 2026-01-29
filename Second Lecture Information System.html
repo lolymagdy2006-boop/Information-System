@@ -67,7 +67,7 @@
             padding: 15px;
             border-radius: 8px;
             overflow-x: auto;
-            color: var(--text-muted);
+            color: var(--text-main);
             border: 1px solid var(--border-color);
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
@@ -142,6 +142,17 @@
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
+
+        /* Logic explanation styling */
+        .example-box {
+            padding: 15px;
+            border-left: 4px solid;
+            margin: 15px 0;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 0 8px 8px 0;
+        }
+        .correct-box { border-color: #27ae60; }
+        .incorrect-box { border-color: #e74c3c; }
     </style>
 </head>
 <body>
@@ -194,10 +205,10 @@
                             <li><b>Termination:</b> Each command is terminated by a semicolon <code>;</code>.</li>
                         </ul>
                         <p><b>Example Commands:</b></p>
-                        <pre><code>CREATE DATABASE BandBooking;
+                        <pre><code><B>CREATE DATABASE BandBooking;
 CREATE TABLE Band (BandName varchar(25), NumberOfMembers integer);
 ALTER TABLE Band ADD PRIMARY KEY (BandName);
-ALTER TABLE Band-Booking ADD FOREIGN KEY (BandName) REFERENCES Band(BandName);</code></pre>
+ALTER TABLE Band-Booking ADD FOREIGN KEY (BandName) REFERENCES Band(BandName);</B></code></pre>
                        
                         <p><b>Note:</b> When an attribute is defined, its data type must be specified (e.g., <code>varchar(25)</code> allows up to 25 characters).</p>
                     </div>
@@ -257,48 +268,48 @@ ALTER TABLE Band-Booking ADD FOREIGN KEY (BandName) REFERENCES Band(BandName);</
                                     <td>05023</td>
                                     <td>Mexico</td>
                                 </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Around the Horn</td>
-                                    <td>Thomas Hardy</td>
-                                    <td>120 Hanover Sq.</td>
-                                    <td>London</td>
-                                    <td>WA1 1DP</td>
-                                    <td>UK</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Berglunds snabbköp</td>
-                                    <td>Christina Berglund</td>
-                                    <td>Berguvsvägen 8</td>
-                                    <td>Luleå</td>
-                                    <td>S-958 22</td>
-                                    <td>Sweden</td>
-                                </tr>
                             </tbody>
                         </table>
-                        <p>The table above contains five records (one for each customer) and seven columns (CustomerID, CustomerName, ContactName, Address, City, PostalCode, and Country).</p>
+                        <p>The table above contains five records (one for each customer) and seven columns (CustomerID, CustomerName, etc.).</p>
+                        
                         <h4>Keep in Mind That...</h4>
-                        <p>SQL keywords are NOT case sensitive: select is the same as SELECT</p>
-                        <p>In this tutorial, we will write all SQL keywords in upper-case.</p>
+                        <p>SQL keywords are NOT case sensitive: <code>select</code> is the same as <code>SELECT</code>. In this tutorial, we will write all SQL keywords in upper-case.</p>
+                        
                         <h4>Semicolon after SQL Statements?</h4>
-                        <p>Some database systems require a semicolon at the end of each SQL statement.</p>
-                        <p>Semicolon is the standard way to separate each SQL statement in database systems that allow more than one SQL statement to be executed in the same call to the server.</p>
-                        <p>In this tutorial, we will use semicolon at the end of each SQL statement.</p>
-                        <h4>Some of The Most Important SQL Commands</h4>
+                        <p>Semicolon is the standard way to separate each SQL statement in database systems that allow more than one statement to be executed in the same call.</p>
+
+                        <div style="margin-top: 30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                            <h3 class="html-title"><b>3. Extracting Data: The SELECT Statement</b></h3>
+                            <p>To pull information out of a table, we use the <code>SELECT</code> command. If you want to see <b>all</b> the data inside a table (every column and every row), you use the asterisk <code>*</code> symbol.</p>
+                            
+                            <div class="example-box correct-box">
+                                <strong>Correct Example:</strong>
+                                <p>To select all records from the Customers table:</p>
+                                <code>SELECT * FROM Customers;</code>
+                                <p><small>The <b>*</b> acts as a wildcard meaning "everything".</small></p>
+                            </div>
+
+                            <div class="example-box incorrect-box">
+                                <strong>Incorrect Examples:</strong>
+                                <p>SQL does not recognize "ALL" as a column wildcard, and you cannot leave the space after SELECT empty:</p>
+                                <ul>
+                                    <li><code>SELECT ALL FROM Customers;</code> (Wrong)</li>
+                                    <li><code>SELECT FROM Customers;</code> (Wrong)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h4>Important SQL Commands Summary</h4>
                         <ul>
                             <li><b>SELECT</b> - extracts data from a database</li>
                             <li><b>UPDATE</b> - updates data in a database</li>
                             <li><b>DELETE</b> - deletes data from a database</li>
                             <li><b>INSERT INTO</b> - inserts new data into a database</li>
                             <li><b>CREATE DATABASE</b> - creates a new database</li>
-                            <li><b>ALTER DATABASE</b> - modifies a database</li>
                             <li><b>CREATE TABLE</b> - creates a new table</li>
-                            <li><b>ALTER TABLE</b> - modifies a table</li>
                             <li><b>DROP TABLE</b> - deletes a table</li>
-                            <li><b>CREATE INDEX</b> - creates an index (search key)</li>
-                            <li><b>DROP INDEX</b> - deletes an index</li>
                         </ul>
+
                         <div class="quiz-section">
                             <h3>Test Your Knowledge</h3>
                             <div class="quiz-item">
@@ -311,8 +322,9 @@ ALTER TABLE Band-Booking ADD FOREIGN KEY (BandName) REFERENCES Band(BandName);</
                                     </ul>
                                 </div>
                                 <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
-                                <p class="quiz-answer">Answer: C</p>
+                                <p class="quiz-answer">Answer: C (Because the * symbol represents all columns)</p>
                             </div>
+
                             <div class="quiz-item">
                                 <div class="quiz-question">
                                     <h4>What is a table in a database?</h4>
@@ -326,6 +338,7 @@ ALTER TABLE Band-Booking ADD FOREIGN KEY (BandName) REFERENCES Band(BandName);</
                                 <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
                                 <p class="quiz-answer">Answer: B</p>
                             </div>
+
                             <div class="quiz-item">
                                 <div class="quiz-question">
                                     <h4>Are SQL keywords case-sensitive?</h4>
@@ -339,6 +352,7 @@ ALTER TABLE Band-Booking ADD FOREIGN KEY (BandName) REFERENCES Band(BandName);</
                                 <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
                                 <p class="quiz-answer">Answer: B</p>
                             </div>
+
                             <div class="quiz-item">
                                 <div class="quiz-question">
                                     <h4>Why is a semicolon used at the end of SQL statements?</h4>
