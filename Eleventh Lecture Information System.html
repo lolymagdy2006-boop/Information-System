@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Exchange Formats: XML</title>
+    <link rel="stylesheet" href="Information System.css">
+    <style>
+        /* Additional styles matching the template */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+       
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+       
+        th {
+            background-color: var(--bg-card-hover);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        code.inline-code {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--accent-cyan);
+        }
+        .mermaid {
+            background-color: white !important;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+       
+        .section-header {
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+        pre code {
+            display: block;
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--bg-card-hover);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quiz-options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .quiz-options li {
+            margin-bottom: 5px;
+        }
+        .quiz-answer {
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--accent-green);
+            display: none;
+        }
+        .quiz-hint {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--text-muted);
+            display: none;
+        }
+        .show-answer-btn {
+            background-color: var(--accent-cyan);
+            color: var(--bg-primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .show-answer-btn:hover {
+            background-color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html" class="home-link">
+        <img src="UNI Logo.jpeg" class="site-logo" alt="Information System Logo">
+        </a>
+        <h2>Information System</h2>
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span>Toggle Theme</span>
+        </button>
+    </div>
+    <div class="container">
+        <a href="#" class="exit-link">Exit Course</a>
+        <header>
+            <div class="syllabus-label">Lecture 11</div>
+            <h1 class="main-title">Introduction to Exchange Formats</h1>
+            <p class="subtitle">Introduction to exchange formats ( CSV ,  XML , JSON ...) and database backup / migration - Part 2</p>
+        </header>
+
+        <p>Since we’ve covered the "duct tape" (CSV), it’s time to move to the "architectural blueprint": XML (eXtensible Markup Language).</p>
+
+        <p>While CSV is great for simple rows, real-world data is often nested, hierarchical, and complex. This 90-minute lecture focuses on why XML remains a titan in enterprise systems and how it handles data integrity.</p>
+
+        <div class="timeline-wrapper">
+            <div class="lesson-item">
+                <div class="indicator blue-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="html-title">Part 1: The Evolution of "Self-Describing" Data</h3>
+                        <p>In CSV, the data is blind a number is just a number. XML changed the game by making data self-describing.</p>
+                        <p><b>The Origins:</b> Derived from SGML (Standard Generalized Markup Language), XML was designed to be both human-readable and machine-readable.</p>
+                        <p><b>The Key Difference:</b> Unlike HTML (which tells a browser how to display data), XML is purely about carrying data.</p>
+                        <p><b>Tree Structure:</b> XML isn't a flat table; it's a hierarchy. This allows for parent-child relationships that CSV simply cannot handle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator purple-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="css-title">Part 2: XML Anatomy & Syntax Rules</h3>
+                        <p>XML is strict. If you break a rule, the parser won't just "guess" it will fail. This "fail-fast" mentality is why it's used for bank transactions and medical records.</p>
+                        <h4>The Component Breakdown</h4>
+                        <p><b>Tags:</b> Must be balanced (an opening &lt;tag&gt; needs a closing &lt;/tag&gt;).</p>
+                        <p><b>Elements:</b> The building blocks (e.g., &lt;price&gt;29.99&lt;/price&gt;).</p>
+                        <p><b>Attributes:</b> Metadata about an element (e.g., &lt;book id="BK101"&gt;).</p>
+                        <p><b>Prolog:</b> The first line &lt;?xml version="1.0" encoding="UTF-8"?&gt; which tells the system how to read the file.</p>
+                        <h4>Well-Formed vs. Valid</h4>
+                        <p><b>Well-Formed:</b> The XML follows the basic syntax rules (tags are closed, nesting is correct).</p>
+                        <p><b>Valid:</b> The XML follows a specific Schema (DTD or XSD). This is like a contract. If the schema says "Age must be an integer," and the XML says "Twenty," the file is well-formed but invalid.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator green-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="standard-title">Part 3: XML in Database Operations</h3>
+                        <p>Why do database administrators care about XML? Because it’s the bridge between a relational database (SQL) and the web.</p>
+                        <ol>
+                            <li><b>The XML Backup</b></li>
+                            <p>Many modern databases (like SQL Server or PostgreSQL) have a native XML data type. You can export an entire table or a complex join into a single XML file.</p>
+                            <p><b>Benefit:</b> It preserves complex relationships that a single CSV would lose.</p>
+                            <p><b>Downside:</b> Verbosity. XML uses a lot of "overhead" (all those tags), making the files significantly larger than CSV or JSON.</p>
+                            <li><b>Migration and Integration</b></li>
+                            <p>In a migration, XML often acts as the Intermediate Format.</p>
+                            <p><b>Scenario:</b> You are moving data from an old Mainframe to a modern Cloud SQL DB.</p>
+                            <p><b>The Workflow:</b> 1. Extract data into XML.
+                                                    2. Use an XSLT (eXtensible Stylesheet Language Transformations) to "remap" the data. 
+                                                    3. Load the transformed XML into the new system.</p>
+                            <li><b>Namespaces: Avoiding "Tag Collisions"</b></li>
+                            <p>Imagine migrating two databases. One uses &lt;id&gt; for "Customer ID," the other uses &lt;id&gt; for "Invoice ID." XML Namespaces (xmlns) allow you to prefix tags (e.g., &lt;cust:id&gt; and &lt;inv:id&gt;) so the computer doesn't get confused during the merge.</p>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-header">Summary and Comparison</h2>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>CSV</th>
+                <th>XML</th>
+            </tr>
+            <tr>
+                <td>Structure</td>
+                <td>Flat (Rows/Cols)</td>
+                <td>Hierarchical (Tree)</td>
+            </tr>
+            <tr>
+                <td>Metadata</td>
+                <td>None (Header only)</td>
+                <td>Self-Describing (Tags)</td>
+            </tr>
+            <tr>
+                <td>Validation</td>
+                <td>Manual/External</td>
+                <td>Built-in (XSD/DTD)</td>
+            </tr>
+            <tr>
+                <td>Size</td>
+                <td>Small/Efficient</td>
+                <td>Large/Verbose</td>
+            </tr>
+        </table>
+
+        <h2 class="section-header">A practical exercise where we convert a flat CSV record into a nested XML structure</h2>
+        <p>This practical exercise will demonstrate how to translate "flat" data into the "nested" hierarchy that XML excels at.</p>
+
+        <h3 class="section-header">The Challenge: From Flat to Hierarchical</h3>
+        <p>Imagine you have a CSV file representing a University Department. In a CSV, if one department has three professors, you often have to repeat the department name three times. In XML, we group them logically.</p>
+
+        <h4>Step 1: The Source (CSV)</h4>
+        <pre><code>DeptName,Room,ProfName,Subject
+Computer Science,Room 404,Alice Smith,Data Structures
+Computer Science,Room 404,Bob Jones,Operating Systems
+Computer Science,Room 404,Charlie Brown,Robotics</code></pre>
+
+        <h4>Step 2: The Transformation Logic</h4>
+        <p>When moving this to XML for a database migration, we look for redundancy.</p>
+        <p>The Department is the "Parent."</p>
+        <p>The Professors are the "Children."</p>
+        <p>The Room is "Metadata" (an Attribute).</p>
+
+        <h4>Step 3: The Result (XML)</h4>
+        <p>Notice how we only define the department name and room once.</p>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;University&gt;
+  &lt;Department name="Computer Science" room="404"&gt;
+    &lt;Professor&gt;
+      &lt;Name&gt;Alice Smith&lt;/Name&gt;
+      &lt;Subject&gt;Data Structures&lt;/Subject&gt;
+    &lt;/Professor&gt;
+    &lt;Professor&gt;
+      &lt;Name&gt;Bob Jones&lt;/Name&gt;
+      &lt;Subject&gt;Operating Systems&lt;/Subject&gt;
+    &lt;/Professor&gt;
+    &lt;Professor&gt;
+      &lt;Name&gt;Charlie Brown&lt;/Name&gt;
+      &lt;Subject&gt;Robotics&lt;/Subject&gt;
+    &lt;/Professor&gt;
+  &lt;/Department&gt;
+&lt;/University&gt;
+</code></pre>
+        <h3 class="section-header">Critical Analysis: Why do this?</h3>
+        <p><b>Data Integrity:</b> In the CSV, if someone typos "Room 405" on the third line, your data is now inconsistent. In the XML version, there is only one room attribute for the whole department, eliminating that risk.</p>
+        <p><b>Schema Validation:</b> We can apply an XSD (XML Schema Definition) to this file that mandates every &lt;Professor&gt; must have exactly one &lt;Name&gt; and one &lt;Subject&gt;. If a record is missing a subject, the database will reject the import immediately.</p>
+        <p><b>Extensibility:</b> If tomorrow we want to add "Office Hours" for professors, we just add a new tag. We don't need to add a new column to every single row in a giant spreadsheet.</p>
+
+        <h3 class="section-header">Workshop Activity</h3>
+        <p>Task: Using the example above, try to "Reverse Engineer" this XML snippet back into a CSV format in your head (or on paper):</p>
+<pre><code>
+    &lt;Library&gt;
+     &lt;Section name="Fiction"&gt;
+      &lt;Book isbn="12345">The Great Gatsby&lt;/Book&gt;
+      &lt;Book isbn="67890">1984&lt;/Book&gt;
+     &lt;/Section&gt;
+    &lt;/Library&gt;
+</code></pre>
+        <p>Questions to consider:</p>
+        <p>How many rows would the CSV have?</p>
+        <p>How many columns would you need?</p>
+        <p>Which data is repeated in the CSV?</p>
+        <p>The "Answer Key" for this reverse engineering task, or shall we move on to a quiz specifically for the XML portion of the lecture</p>
+
+        <div class="quiz-section">
+            <h3>Test Your Knowledge</h3>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>1. What does it mean for XML to be 'self-describing'?</h4>
+                    <ul>
+                        <li>A. The file automatically fixes its own syntax errors.</li>
+                        <li>B. The file can be read by any human, regardless of their language.</li>
+                        <li>C. The tags (like ) provide context and meaning to the data they enclose.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Hint</button>
+                <p class="quiz-hint">Think about the purpose of the tags.</p>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: C</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>2. An XML file follows all basic syntax rules (closed tags, proper nesting) but violates its XSD schema. How is this file classified?</h4>
+                    <ul>
+                        <li>A. Corrupted</li>
+                        <li>B. Valid but poorly-formed</li>
+                        <li>C. Well-formed but invalid</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Hint</button>
+                <p class="quiz-hint">Syntax vs. Contract.</p>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: C</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>3. What is XSLT primarily used for in database migrations?</h4>
+                    <ul>
+                        <li>A. To transform XML from one structure or format into another.</li>
+                        <li>B. To encrypt the database password.</li>
+                        <li>C. To speed up the physical download of the file.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: A</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="Information System.js"></script>
+</body>
+</html>

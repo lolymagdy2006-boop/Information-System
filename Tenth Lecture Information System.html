@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Exchange Formats: CSV and Database Backup/Migration</title>
+    <link rel="stylesheet" href="Information System.css">
+    <style>
+        /* Additional styles matching the template */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+       
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+       
+        th {
+            background-color: var(--bg-card-hover);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        code.inline-code {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--accent-cyan);
+        }
+        .mermaid {
+            background-color: white !important;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+       
+        .section-header {
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+        pre code {
+            display: block;
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--bg-card-hover);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quiz-options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .quiz-options li {
+            margin-bottom: 5px;
+        }
+        .quiz-answer {
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--accent-green);
+            display: none;
+        }
+        .quiz-hint {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--text-muted);
+            display: none;
+        }
+        .show-answer-btn {
+            background-color: var(--accent-cyan);
+            color: var(--bg-primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .show-answer-btn:hover {
+            background-color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html" class="home-link">
+        <img src="UNI Logo.jpeg" class="site-logo" alt="Information System Logo">
+        </a>
+        <h2>Information System</h2>
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span>Toggle Theme</span>
+        </button>
+    </div>
+    <div class="container">
+        <a href="#" class="exit-link">Exit Course</a>
+        <header>
+            <div class="syllabus-label">Lecture 10</div>
+            <h1>Introduction to Exchange Formats and Database Backup/Migration</h1>
+            <p class="subtitle">Introduction to exchange formats ( CSV ,  XML , JSON ...) and database backup / migration - Part 1</p>
+        </header>
+
+        <p>How data moves from Point A to Point B. This lecture is designed to bridge the gap between "flat files" and complex database systems.</p>
+
+        <div class="timeline-wrapper">
+            <div class="lesson-item">
+                <div class="indicator blue-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="html-title">Part 1: The Philosophy of Exchange Formats</h3>
+                        <p>Before we look at code, we have to understand interoperability. Data is often "trapped" in a specific software’s proprietary format. An exchange format acts as a universal translator.</p>
+                        <p><b>The Problem:</b> Vendor lock-in. If System A stores data in a way System B can’t read, the data is useless.</p>
+                        <p><b>The Solution:</b> Standardized, human-readable (or highly structured) formats.</p>
+                        <p><b>Key Characteristics:</b></p>
+                        <p><b>Portability:</b> Can it move across operating systems?</p>
+                        <p><b>Parsability:</b> How easy is it for a machine to break it down?</p>
+                        <p><b>Size vs. Verbosity:</b> Is it lightweight (CSV) or descriptive (JSON/XML)?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator purple-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="css-title">Part 2: Deep Dive into CSV</h3>
+                        <p>The Comma-Separated Values format is the "duct tape" of data science. It’s simple, ubiquitous, and surprisingly nuanced.</p>
+                        <h4>How it Works</h4>
+                        <p>A CSV is essentially a text file where each line represents a data record, and each record consists of one or more fields, separated by commas.</p>
+                        <h4>The "Gotchas" of CSV</h4>
+                        <p>It’s not as simple as it looks. In a 1.5-hour session, we must cover the pitfalls:</p>
+                        <p><b>The Delimiter Dilemma:</b> What if your data contains commas (e.g., "New York, NY")? This requires encapsulation (using double quotes).</p>
+                        <p><b>Character Encoding:</b> If you save a file in UTF-8 but your system reads it in Windows-1252, your symbols will break (the dreaded "mojibake").</p>
+                        <p><b>Lack of Schema:</b> CSVs don't tell you if a column is a "Date" or a "String." You have to guess or define it during the import.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator green-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="standard-title">Part 3: Database Backup & Migration</h3>
+                        <p>This is where the stakes get high. We aren't just moving a file; we are moving a living system.</p>
+                        <ol>
+                            <li><b>Database Backups: The Safety Net</b></li>
+                            <p><b>Logical Backups:</b> Exporting the data into a series of SQL commands (e.g., mysqldump). These are highly portable but can be slow to restore for massive datasets.</p>
+                            <p><b>Physical Backups:</b> Copying the actual data files from the disk. They are fast but usually require the same database version and OS to work.</p>
+                            <li><b>The Migration Workflow (ETL)</b></li>
+                            <p>Migration is rarely a "copy-paste" job. It usually follows the ETL framework:</p>
+                            <p><b>Extract:</b> Pulling data from the source (often into a CSV or JSON exchange format).</p>
+                            <p><b>Transform:</b> Cleaning the data. This is where you fix date formats, handle null values, or map old IDs to new ones.</p>
+                            <p><b>Load:</b> Pushing the cleaned data into the target system.</p>
+                            <img src="ETL Process Diagram.png" alt="ETL Process Diagram" class="diagram">
+
+
+
+                            <li><b>Migration Challenges</b></li>
+                            <p><b>Data Integrity:</b> Ensuring no rows are lost during transit.</p>
+                            <p><b>Downtime:</b> Do you turn the app off while migrating, or do you use CDC (Change Data Capture) to migrate while the site is live?</p>
+                            <p><b>Schema Mapping:</b> If the old DB has a name field but the new one uses first_name and last_name, the exchange format must be transformed.</p>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-header">Summary and Key Takeaways</h2>
+        <ul>
+            <li>Exchange formats like CSV are the bridge between incompatible systems.</li>
+            <li>CSVs are powerful because of their simplicity but dangerous because they lack strict rules.</li>
+            <li>Migrations are high-risk operations that require a rigorous Extract → Transform → Load process to ensure data stays valid.</li>
+        </ul>
+
+        <div class="quiz-section">
+            <h3>Test Your Knowledge</h3>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>1. In the context of data exchange formats, what is the primary goal of 'interoperability'?</h4>
+                    <ul>
+                        <li>A. The process of compressing data to reduce storage costs.</li>
+                        <li>B. The ability of different systems to communicate and exchange data without proprietary restrictions.</li>
+                        <li>C. The encryption of data to prevent unauthorized access during transit.</li>
+                        <li>D. The automation of database hardware maintenance.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: B</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>2. If a CSV file contains a field with a value like 'Los Angeles, CA', how is the comma usually handled to prevent it from being treated as a delimiter?</h4>
+                    <ul>
+                        <li>A. By replacing the comma with a semicolon.</li>
+                        <li>B. By converting the file to a JSON format automatically.</li>
+                        <li>C. By deleting the comma from the data entirely.</li>
+                        <li>D. By encapsulating the field in double quotes.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: D</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>3. What is a significant disadvantage of using CSV files compared to formats like XML or JSON?</h4>
+                    <ul>
+                        <li>A. CSVs are proprietary to Microsoft Excel.</li>
+                        <li>B. CSVs are too large in file size.</li>
+                        <li>C. CSVs cannot be opened in simple text editors.</li>
+                        <li>D. CSVs lack a built-in schema or data type definitions.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: D</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>4. Which phase of the ETL process involves cleaning data, fixing date formats, and mapping old IDs to new ones?</h4>
+                    <ul>
+                        <li>A. Extract</li>
+                        <li>B. Exchange</li>
+                        <li>C. Transform</li>
+                        <li>D. Load</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: C</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>5. What is the main advantage of a 'Logical Backup' (e.g., an SQL dump) over a 'Physical Backup'?</h4>
+                    <ul>
+                        <li>A. It requires less CPU and memory to generate.</li>
+                        <li>B. It is much faster to perform on multi-terabyte databases.</li>
+                        <li>C. It includes the hardware configuration of the server.</li>
+                        <li>D. It is highly portable and can often be restored across different OS or DB versions.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: D</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>6. When migrating data from a system that uses 'UTF-8' encoding to one that expects 'Windows-1252', what is the likely outcome if the conversion is ignored?</h4>
+                    <ul>
+                        <li>A. The migration will be 100% faster.</li>
+                        <li>B. The database will automatically fix the encoding.</li>
+                        <li>C. The file size will double.</li>
+                        <li>D. Special characters and symbols will appear as garbled text (mojibake).</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: D</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>7. Which method is best suited for migrating a database for a high-traffic application that cannot afford hours of downtime?</h4>
+                    <ul>
+                        <li>A. Standard SQL dump.</li>
+                        <li>B. Manual CSV export/import.</li>
+                        <li>C. Offline physical backup and restore.</li>
+                        <li>D. Change Data Capture (CDC).</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: D</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>8. In the ETL process, what does the 'Load' step specifically refer to?</h4>
+                    <ul>
+                        <li>A. Writing the transformed data into the target database.</li>
+                        <li>B. Pulling data from the cloud.</li>
+                        <li>C. Calculating the total number of records to be moved.</li>
+                        <li>D. Compressing the CSV file for transport.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: A</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>9. Why is 'Schema Mapping' a common challenge during database migration?</h4>
+                    <ul>
+                        <li>A. Because most databases use the exact same column names.</li>
+                        <li>B. Because it requires changing the physical hardware of the server.</li>
+                        <li>C. Because CSVs can only hold one column of data.</li>
+                        <li>D. Because the source and target systems may structure the same data differently (e.g., 'Name' vs 'First/Last Name').</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: D</p>
+            </div>
+            <div class="quiz-item">
+                <div class="quiz-question">
+                    <h4>10. Which of the following describes a 'Physical Backup'?</h4>
+                    <ul>
+                        <li>A. A collection of INSERT and CREATE statements in a text file.</li>
+                        <li>B. A spreadsheet containing the database records.</li>
+                        <li>C. An exact copy of the binary files and directories used by the database engine on the disk.</li>
+                        <li>D. A handwritten log of all database changes.</li>
+                    </ul>
+                </div>
+                <button class="show-answer-btn" type="button" onclick="this.nextElementSibling.style.display='block'; this.style.display='none';">Show Answer</button>
+                <p class="quiz-answer">Answer: C</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="Information System.js"></script>
+</body>
+</html>

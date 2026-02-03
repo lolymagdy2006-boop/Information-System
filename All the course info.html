@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Syllabus: Data Exchange Formats & Migration</title>
+    <link rel="stylesheet" href="Information System.css">
+    <style>
+        /* Additional styles matching the template */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+       
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+       
+        th {
+            background-color: var(--bg-card-hover);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        code.inline-code {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--accent-cyan);
+        }
+        .mermaid {
+            background-color: white !important;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+       
+        .section-header {
+            color: var(--accent-blue);
+            border-bottom: 2px solid var(--accent-cyan);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+        pre code {
+            display: block;
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .quiz-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--bg-card-hover);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quiz-options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .quiz-options li {
+            margin-bottom: 5px;
+        }
+        .quiz-answer {
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--accent-green);
+            display: none;
+        }
+        .quiz-hint {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--text-muted);
+            display: none;
+        }
+        .show-answer-btn {
+            background-color: var(--accent-cyan);
+            color: var(--bg-primary);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .show-answer-btn:hover {
+            background-color: var(--accent-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html" class="home-link">
+        <img src="UNI Logo.jpeg" class="site-logo" alt="Information System Logo">
+        </a>
+        <h2>Information System</h2>
+        <button id="themeToggle" class="theme-toggle">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span>Toggle Theme</span>
+        </button>
+    </div>
+    <div class="container">
+        <a href="#" class="exit-link">Exit Course</a>
+        <header>
+            <div class="syllabus-label">Course Syllabus</div>
+            <h1>Syllabus: Data Exchange Formats & Migration</h1>
+            <p class="subtitle">Here is the Complete Course Syllabus. You can use this as a structural guide for a workshop, a corporate training session, or a university module.</p>
+        </header>
+
+        <p>Course Duration: 4.5 Hours (3 x 90-Minute Modules)</p>
+
+        <p>Level: Intermediate (Ideal for Junior Devs, DBAs, or Data Analysts)</p>
+
+        <div class="timeline-wrapper">
+            <div class="lesson-item">
+                <div class="indicator blue-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="html-title">Module 1: The "Duct Tape" of Data — CSV & Foundations</h3>
+                        <p>The Problem of Proprietary Formats: Understanding vendor lock-in and the need for universal translators.</p>
+                        <p>CSV Deep Dive: * Anatomy of a flat file.</p>
+                        <p>Handling the "Delimiter Dilemma" (encapsulation and escaping).</p>
+                        <p>The dangers of "blind" data (lack of schema).</p>
+                        <p>Encoding Basics: Preventing "mojibake" through proper UTF-8 standardization.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator purple-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="css-title">Module 2: The "Blueprint" — XML & Validation</h3>
+                        <p>Hierarchy vs. Flatness: Why trees are better for complex relationships.</p>
+                        <p>Well-Formed vs. Valid: The role of the Prolog, Tags, and Attributes.</p>
+                        <p>Data Governance: Using XSD (XML Schema Definition) as a legal contract for data integrity.</p>
+                        <p>Enterprise Integration: Namespaces and XSLT transformations for legacy system migrations.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-item">
+                <div class="indicator green-glow"></div>
+                <div class="card">
+                    <div class="content-area">
+                        <h3 class="standard-title">Module 3: The "Web Standard" — JSON & Modern Migration</h3>
+                        <p>The Weight of the Web: Comparing JSON verbosity to XML.</p>
+                        <p>Native Data Types: Booleans, Numbers, and Nulls in the exchange layer.</p>
+                        <p>Modern Database Architectures: * NoSQL/Document Stores: Moving data to MongoDB.</p>
+                        <p>Hybrid SQL: Using JSONB in PostgreSQL/MySQL.</p>
+                        <p>The ETL Pipeline: Extracting from SQL, Transforming logic, and Loading into the Cloud.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-header">Graduation Project: The Universal Converter</h2>
+        <p>Task: Students must take a raw set of "flat" student records and generate:</p>
+        <p>A CSV for the Registrar's Office (Bulk import).</p>
+        <p>A JSON file for the Mobile App (High speed).</p>
+        <p>A Validated XML file for the Financial Aid Office (High security).</p>
+
+        <h2 class="section-header">Summary Cheat Sheet (The Final Recap)</h2>
+        <table>
+            <tr>
+                <th>Goal</th>
+                <th>Best Format</th>
+                <th>Why?</th>
+            </tr>
+            <tr>
+                <td>Bulk Speed</td>
+                <td>CSV</td>
+                <td>Lowest overhead, easy to stream.</td>
+            </tr>
+            <tr>
+                <td>Strict Security</td>
+                <td>XML</td>
+                <td>Can be strictly validated by a schema before processing.</td>
+            </tr>
+            <tr>
+                <td>Web Performance</td>
+                <td>JSON</td>
+                <td>Native to JavaScript, smaller bandwidth footprint.</td>
+            </tr>
+        </table>
+
+        <h2 class="section-header">Congratulations!</h2>
+        <p>You've just completed the full curriculum. Your students are now equipped to handle everything from a simple spreadsheet export to a complex, multi-system database migration.</p>
+
+    </div>
+    <script src="Information System.js"></script>
+</body>
+</html>
