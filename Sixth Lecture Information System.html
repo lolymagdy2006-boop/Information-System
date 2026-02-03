@@ -74,62 +74,6 @@
             margin: 20px auto;
             display: block;
         }
-        .quiz-section {
-            margin-top: 40px;
-            padding: 20px;
-            background-color: var(--bg-card);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .quiz-question {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        .quiz-question h4 {
-            margin: 0 0 10px 0;
-            color: white;
-        }
-        .quiz-question ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .quiz-question li {
-            background-color: #34495e;
-            padding: 10px;
-            margin-bottom: 5px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .quiz-question li:hover {
-            background-color: #4a6a8a;
-        }
-        .quiz-answer {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #27ae60;
-            color: white;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .show-answer-btn {
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-        .show-answer-btn:hover {
-            background-color: var(--accent-cyan);
-        }
         .card {
             transition: transform 0.3s, box-shadow 0.3s;
         }
@@ -163,6 +107,7 @@
             <span>Toggle Theme</span>
         </button>
     </div>
+
     <div class="container">
         <a href="#" class="exit-link">Exit Course</a>
         <header>
@@ -182,8 +127,10 @@
                         <p><b>Client-Server Model:</b> The console (e.g., mysql, psql, or sqlplus) is a client that sends requests over a specific port (typically 3306 for MySQL or 5432 for PostgreSQL).</p>
                         <p><b>The Connection String:</b> Breaking down the standard syntax: db_client -h [host] -P [port] -u [user] -p</p>
                         <p><b>Session vs. Global Scope:</b> Understanding that some settings you change in the console only last for your current login, while others affect the entire server.</p>
-    
+                    </div>
+                </div>
             </div>
+
             <div class="lesson-item">
                 <div class="indicator blue-glow"></div>
                 <div class="card">
@@ -196,6 +143,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="lesson-item">
                 <div class="indicator blue-glow"></div>
                 <div class="card">
@@ -203,20 +151,21 @@
                         <h3 class="html-title"><b>3. Advanced DML & Transaction Control (25 Mins)</b></h3>
                         <p>This is where the operation becomes "relational."</p>
                         <p>Complex Joins: Mastering INNER, LEFT, and FULL joins to stitch disparate tables together.</p>
-                        <p>ACID Compliance in Practice: * BEGIN/START TRANSACTION: Opening a safe space for changes.</p>
+                        <p>ACID Compliance in Practice: BEGIN/START TRANSACTION: Opening a safe space for changes.</p>
                         <p>COMMIT: Making changes permanent.</p>
                         <p>ROLLBACK: The "emergency brake" to undo errors before they hit the disk.</p>
                         <p>The WHERE Clause Pitfall: A reminder that in the console, an UPDATE or DELETE without a WHERE clause is a career-ending mistake.</p>
                     </div>
                 </div>
             </div>
+
             <div class="lesson-item">
                 <div class="indicator blue-glow"></div>
                 <div class="card">
                     <div class="content-area">
                         <h3 class="html-title"><b>4. Administrative Tools & Maintenance (20 Mins)</b></h3>
                         <p>A database administrator (DBA) uses the console for more than just data entry.</p>
-                        <p>User Management: * CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';</p>
+                        <p>User Management: CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';</p>
                         <p>GRANT vs. REVOKE: The principle of least privilege.</p>
                         <p>Backup & Recovery: Utilizing external tools via the terminal:</p>
                         <p>mysqldump or pg_dump: Exporting logical backups.</p>
@@ -225,6 +174,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="lesson-item">
                 <div class="indicator blue-glow"></div>
                 <div class="card">
@@ -237,6 +187,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="lesson-item">
                 <div class="indicator blue-glow"></div>
                 <div class="card">
@@ -251,36 +202,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Connect</td>
-                                    <td>mysql -u root -p</td>
-                                    <td>psql -U username -d dbname</td>
-                                </tr>
-                                <tr>
-                                    <td>List Databases</td>
-                                    <td>SHOW DATABASES;</td>
-                                    <td>\l</td>
-                                </tr>
-                                <tr>
-                                    <td>Switch Database</td>
-                                    <td>USE dbname;</td>
-                                    <td>\c dbname</td>
-                                </tr>
-                                <tr>
-                                    <td>List Tables</td>
-                                    <td>SHOW TABLES;</td>
-                                    <td>\dt</td>
-                                </tr>
-                                <tr>
-                                    <td>Table Schema</td>
-                                    <td>DESCRIBE tablename;</td>
-                                    <td>\d tablename</td>
-                                </tr>
-                                <tr>
-                                    <td>Exit</td>
-                                    <td>exit or \q</td>
-                                    <td>\q</td>
-                                </tr>
+                                <tr><td>Connect</td><td>mysql -u root -p</td><td>psql -U username -d dbname</td></tr>
+                                <tr><td>List Databases</td><td>SHOW DATABASES;</td><td>\l</td></tr>
+                                <tr><td>Switch Database</td><td>USE dbname;</td><td>\c dbname</td></tr>
+                                <tr><td>List Tables</td><td>SHOW TABLES;</td><td>\dt</td></tr>
+                                <tr><td>Table Schema</td><td>DESCRIBE tablename;</td><td>\d tablename</td></tr>
+                                <tr><td>Exit</td><td>exit or \q</td><td>\q</td></tr>
                             </tbody>
                         </table>
                     </div>
